@@ -103,20 +103,6 @@ export default {
     }
 }
 
-function _fetchmovie(patload){
-    const {title, type, year, page, id} = patload
-    const OMDB_API_KEY = '7035c60c'
-    const url = id 
-            ? `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${id}` 
-            : `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=${page}`
-
-    return new Promise((resolve, reject) => {
-        axios.get(url).then((res) => {
-            resolve(res)
-            console.log(res)
-        }).catch((err) => {
-            reject(err.message)
-            console.log(err.message)
-        })
-    })
+async function _fetchmovie(payload){
+   return await axios.post('/.netlify/functions/movie', payload)
 }
